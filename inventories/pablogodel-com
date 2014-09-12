@@ -1,0 +1,2 @@
+[pablogodel-com]
+pablogodel.com ansible_ssh_user=root

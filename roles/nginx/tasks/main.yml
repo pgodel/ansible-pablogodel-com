@@ -1,0 +1,18 @@
+---
+- name: Install NGINX repo
+  copy: src=files/nginx.repo dest=/etc/yum.repos.d/nginx.repo
+
+- name: Install Nginx
+  sudo: yes
+  yum: pkg=nginx state=latest
+
+- name: Install NGINX cache config
+  copy: src=files/nginx/0_cache.conf dest=/etc/nginx/conf.d/0_cache.conf
+
+- name: Install NGINX site config
+  copy: src=files/nginx/default.conf dest=/etc/nginx/conf.d/default.conf
+  notify: restart nginx
+
+- name: Install NGINX site SSL config
+  copy: src=files/nginx/pablogodel-ssl.conf dest=/etc/nginx/conf.d/pablogodel-ssl.conf
+  notify: restart nginx
